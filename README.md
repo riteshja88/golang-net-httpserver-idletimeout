@@ -122,3 +122,32 @@ got / request
 [2022-09-29 13:30:06] This is my website!
 [2022-09-29 13:30:36] <<<<<end>>>>>
 ```
+
+
+
+## timeout = 10s (sleep for 5s on server side while responding)
+```
+func getRoot(w http.ResponseWriter, r *http.Request) {
+    fmt.Printf("got / request\n")
+    fmt.Printf("sleeping for 5s\n")
+    time.Sleep(5 * time.Second)
+    fmt.Printf("sleep complete\n")
+    io.WriteString(w, "This is my website!\n")
+}
+
+server := &http.Server{Addr: ":3334", IdleTimeout: time.Duration(10) * time.Second}
+
+$ go run p1.go|ts '[%Y-%m-%d %H:%M:%S]' &
+$ echo "<<<<start>>>>>"|ts '[%Y-%m-%d %H:%M:%S]';echo -n -e "GET / HTTP/1.1\nHost: 127.0.0.1:3334\n\n"|nc 127.0.0.1 3334| ts '[%Y-%m-%d %H:%M:%S]';echo "<<<<<end>>>>>"|ts '[%Y-%m-%d %H:%M:%S]'
+[2022-09-29 17:25:47] <<<<start>>>>>
+[2022-09-29 17:25:47] got / request
+[2022-09-29 17:25:47] sleeping for 5s
+[2022-09-29 17:25:52] sleep complete
+[2022-09-29 17:25:52] HTTP/1.1 200 OK
+[2022-09-29 17:25:52] Date: Thu, 29 Sep 2022 11:55:52 GMT
+[2022-09-29 17:25:52] Content-Length: 20
+[2022-09-29 17:25:52] Content-Type: text/plain; charset=utf-8
+[2022-09-29 17:25:52]
+[2022-09-29 17:25:52] This is my website!
+[2022-09-29 17:26:02] <<<<<end>>>>>
+```
