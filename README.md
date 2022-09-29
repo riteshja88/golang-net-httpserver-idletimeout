@@ -6,14 +6,17 @@ server := &http.Server{Addr: ":3334"}
 
 $ go run p1.go &
 $ echo "<<<<start>>>>>"|ts '[%Y-%m-%d %H:%M:%S]';echo -n -e "GET / HTTP/1.1\nHost: 127.0.0.1:3334\n\n"|nc 127.0.0.1 3334| ts '[%Y-%m-%d %H:%M:%S]';echo "<<<<<end>>>>>"|ts '[%Y-%m-%d %H:%M:%S]'
-[2022-09-29 13:37:46] <<<<start>>>>>
+[2022-09-29 14:20:42] <<<<start>>>>>
 got / request
-[2022-09-29 13:37:46] HTTP/1.1 200 OK
-[2022-09-29 13:37:46] Date: Thu, 29 Sep 2022 08:07:46 GMT
-[2022-09-29 13:37:46] Content-Length: 20
-[2022-09-29 13:37:46] Content-Type: text/plain; charset=utf-8
-[2022-09-29 13:37:46]
-[2022-09-29 13:37:46] This is my website!
+[2022-09-29 14:20:42] HTTP/1.1 200 OK
+[2022-09-29 14:20:42] Date: Thu, 29 Sep 2022 08:50:42 GMT
+[2022-09-29 14:20:42] Content-Length: 20
+[2022-09-29 14:20:42] Content-Type: text/plain; charset=utf-8
+[2022-09-29 14:20:42]
+[2022-09-29 14:20:42] This is my website!
+^Z
+[2]+  Stopped                 echo -n -e "GET / HTTP/1.1\nHost: 127.0.0.1:3334\n\n" | nc 127.0.0.1 3334 | ts '[%Y-%m-%d %H:%M:%S]'
+[2022-09-29 17:15:28] <<<<<end>>>>>
 ```
 
 
