@@ -93,7 +93,6 @@ server := &http.Server{Addr: ":3334", IdleTimeout: time.Duration(20) * time.Seco
 $ go run p1.go &
 $ echo "<<<<start>>>>>"|ts '[%Y-%m-%d %H:%M:%S]';echo -n -e "GET / HTTP/1.1\nHost: 127.0.0.1:3334\n\n"|nc 127.0.0.1 3334| ts '[%Y-%m-%d %H:%M:%S]';echo "<<<<<end>>>>>"|ts '[%Y-%m-%d %H:%M:%S]'
 [2022-09-29 13:29:29] <<<<start>>>>>
-[2022-09-29 13:29:29] <<<<start>>>>>
 got / request
 [2022-09-29 13:29:29] HTTP/1.1 200 OK
 [2022-09-29 13:29:29] Date: Thu, 29 Sep 2022 07:59:29 GMT
