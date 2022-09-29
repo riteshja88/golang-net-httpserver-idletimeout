@@ -71,7 +71,7 @@ tcp6       0      0 127.0.0.1:3334          127.0.0.1:44808         ESTABLISHED 
 
 ## timeout = 10s
 ```
-server := &http.Server{Addr: ":3334", IdleTimeout: time.Duration(30) * time.Second}
+server := &http.Server{Addr: ":3334", IdleTimeout: time.Duration(10) * time.Second}
 
 $ go run p1.go &
 $ echo "<<<<start>>>>>"|ts '[%Y-%m-%d %H:%M:%S]';echo -n -e "GET / HTTP/1.1\nHost: 127.0.0.1:3334\n\n"|nc 127.0.0.1 3334| ts '[%Y-%m-%d %H:%M:%S]';echo "<<<<<end>>>>>"|ts '[%Y-%m-%d %H:%M:%S]'
